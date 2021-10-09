@@ -22,6 +22,10 @@ class Main {
                 cowin.Register_Vaccine();
             }
 
+            if(query==2){
+                cowin.Register_Hospital();
+            }
+
             if(query==8){ break;}
 
 
