@@ -16,4 +16,12 @@ public class Hospital {
     void print_details(){
         System.out.println("Hospital Name: "+name+" , Pincode: "+Pincode+" , Unique Id: "+Hospital_id);
     }
+
+    boolean is_equal(Hospital x){
+
+        if(x.name.equals(this.name) && x.Pincode==this.Pincode){
+            return true; }
+
+        return false;
+    }
 }

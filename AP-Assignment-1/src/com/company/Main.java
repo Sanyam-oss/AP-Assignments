@@ -26,6 +26,10 @@ class Main {
                 cowin.Register_Hospital();
             }
 
+            if(query==4){
+                cowin.Enter_Slots();
+            }
+
             if(query==8){ break;}
 
 

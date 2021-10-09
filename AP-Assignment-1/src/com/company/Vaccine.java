@@ -16,5 +16,17 @@ public class Vaccine {
         System.out.println("Vaccine Name: "+name+" , Number of Doses: "+doses+" , Gap between Doses: "+gap);
     }
 
+    boolean is_equal(Vaccine x){
+
+        if((x.name.equals(this.name)) && (x.doses==this.doses) && (x.gap==this.gap)){
+            return true;
+        }
+        return false;
+    }
+
+    String getName(){
+        return this.name;
+    }
+
 
 }

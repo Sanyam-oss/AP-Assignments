@@ -7,11 +7,56 @@ public class Cowin {
     private static int hospital_id ;
     private ArrayList<Vaccine> Vaccines_record = new ArrayList<Vaccine>();
     private ArrayList<Hospital> Hospital_record = new ArrayList<Hospital>();
+    private ArrayList<Slot> Slots_Available = new ArrayList<Slot>();
 
     Cowin(){
 
         hospital_id = 100000;
 
+    }
+
+    void Enter_Slots(){
+
+        Scanner sc= new Scanner(System.in);
+
+        System.out.print("Enter Hospital ID: ");
+        int id = sc.nextInt();
+
+        if(id<100000 || id>=hospital_id){
+            System.out.println("Not Valid Id");
+            return;
+        }
+
+        System.out.print("Enter Number of Slots to be added: ");
+        int num = sc.nextInt();
+
+        for(int i=0;i<num;i++){
+
+            System.out.print("Enter Day Number: ");
+            int day = sc.nextInt();
+            System.out.print("Enter Quantity: ");
+            int qty = sc.nextInt();
+            System.out.println("Select Vaccine: ");
+
+            for(int j = 0 ; j < Vaccines_record.size();j++){
+
+                System.out.println(j+"."+Vaccines_record.get(j).getName());
+            }
+
+            int vaccine_ind = sc.nextInt();
+            if(vaccine_ind>= Vaccines_record.size()){
+                System.out.println("Invalid Vaccine Code");
+                return;
+            }
+            add_Slot(id,day,qty,vaccine_ind);
+        }
+    }
+
+    void add_Slot(int id ,int day,int qty,int vaccine_ind){
+
+        Slot slot = new Slot(id,day,qty,Vaccines_record.get(vaccine_ind));
+        Slots_Available.add(slot);
+        slot.print_details();
     }
 
     void Register_Vaccine(){
@@ -41,9 +86,14 @@ public class Cowin {
 
         Vaccine vaccine = new Vaccine(name,doses,gap);
 
-        Vaccines_record.add(vaccine);     // Assuming same vaccine not added twice
-        vaccine.print_details();
+        if(!Is_Vaccine_present(vaccine)) {
+            Vaccines_record.add(vaccine);
+            vaccine.print_details();
+        }
 
+        else {
+            System.out.println("Vaccine already Registered");
+        }
     }
 
     void Register_Hospital(){
@@ -67,9 +117,14 @@ public class Cowin {
 
         Hospital hospital = new Hospital(name,pincode,hospital_id);
 
-        Hospital_record.add(hospital);    // Assuming same hospital not added twice
-        hospital.print_details();
-        hospital_id++;
+        if(!Is_Hospital_registered(hospital)) {
+            Hospital_record.add(hospital);
+            hospital.print_details();
+            hospital_id++;
+        }
+        else {
+            System.out.println("Hospital already registered");
+        }
     }
 
     boolean Is_Vaccine_present(Vaccine vaccine){
@@ -78,7 +133,7 @@ public class Cowin {
 
         for(int i=0 ; i < vaccine_record_size ; i++ ){
 
-            if(vaccine.equals(Vaccines_record.get(i))){
+            if(vaccine.is_equal(Vaccines_record.get(i))){
                 return true;
             }
         }
@@ -91,7 +146,7 @@ public class Cowin {
 
         for(int i=0 ; i < hospital_record_size ; i++ ){
 
-            if(hospital.equals(Hospital_record.get(i))){
+            if(hospital.is_equal(Hospital_record.get(i))){
                 return true;
             }
         }
