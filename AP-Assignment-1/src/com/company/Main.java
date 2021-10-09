@@ -1,9 +1,16 @@
 package com.company;
 
-public class Main {
+class Main {
 
     public static void main(String[] args) {
 
-        System.out.println("Checking repo setup");
+        Cowin cowin = new Cowin();
+        System.out.println( "Cowin Portal initialised...");
+
+
+
     }
+
 }
+
+
