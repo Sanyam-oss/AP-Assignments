@@ -6,7 +6,28 @@ public class Cowin {
 
     private ArrayList<Vaccine> Vaccines_record = new ArrayList<Vaccine>();
 
+    void Register_Vaccine(){
 
+        Scanner sc= new Scanner(System.in);
+
+        System.out.print("Vaccine Name: ");
+        String name = sc.nextLine();
+        System.out.print("Number of Doses: ");
+        int doses = sc.nextInt();
+        if(doses<=0){
+            System.out.println("Invalid Input for required field");}
+        else if(doses==1){
+            add_Vaccine(name,doses,0); }
+        else {
+            System.out.print("Gap between Doses: ");
+            int gap = sc.nextInt();
+            if (gap < 1) {
+                System.out.println("Invalid Input for required field");
+            } else {
+                add_Vaccine(name, doses, gap);
+            }
+        }
+    }
     void add_Vaccine(String name,int doses,int gap){
 
         Vaccine vaccine = new Vaccine(name,doses,gap);
