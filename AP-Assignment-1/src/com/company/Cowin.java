@@ -127,6 +127,23 @@ public class Cowin {
         }
     }
 
+    void search_slots_by_hospital(){
+
+        Scanner sc= new Scanner(System.in);
+
+        System.out.print("Enter Hospital Id: ");
+        int id = sc.nextInt();
+
+        for(int i=0;i<Slots_Available.size();i++){
+
+            Slot slot = Slots_Available.get(i);
+
+            if(slot.getHospital_id()==id){
+                System.out.println("Day: "+slot.getDay()+" | Vaccine: "+slot.getVaccine().getName()+" | Available Qty :"+slot.getQty());
+            }
+        }
+    }
+
     boolean Is_Vaccine_present(Vaccine vaccine){
 
         int vaccine_record_size = Vaccines_record.size();
