@@ -16,7 +16,6 @@ class Main {
             cowin.display_menu();
 
             int query = sc.nextInt();
-            sc.nextLine();
 
             if(query==1){
                 cowin.Register_Vaccine();
@@ -24,6 +23,10 @@ class Main {
 
             if(query==2){
                 cowin.Register_Hospital();
+            }
+
+            if(query==3){
+                cowin.Register_citizen();
             }
 
             if(query==4){

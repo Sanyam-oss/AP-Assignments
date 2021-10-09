@@ -7,6 +7,7 @@ public class Cowin {
     private static int hospital_id ;
     private ArrayList<Vaccine> Vaccines_record = new ArrayList<Vaccine>();
     private ArrayList<Hospital> Hospital_record = new ArrayList<Hospital>();
+    private ArrayList<Citizen> Citizen_record = new ArrayList<Citizen>();
     private ArrayList<Slot> Slots_Available = new ArrayList<Slot>();
 
     Cowin(){
@@ -127,6 +128,46 @@ public class Cowin {
         }
     }
 
+    void Register_citizen(){
+
+        Scanner sc= new Scanner(System.in);
+
+        System.out.print("Citizen Name: ");
+        String name = sc.nextLine();
+        System.out.print("Age: ");
+        int age = sc.nextInt();
+        sc.nextLine();
+        System.out.print("Unique Id: ");
+        String Id = sc.nextLine();
+
+        Citizen citizen = new Citizen(age,name,Id);
+        citizen.print_details();
+
+        if(age<=18){
+            System.out.println("Only above 18 are allowed");
+            return;
+        }
+
+        if(Id.length()!=12){
+            System.out.println("Invalid ID , Length must be of Length 12 ");
+            return;
+        }
+
+        add_Citizen(citizen);
+    }
+
+    void add_Citizen(Citizen citizen){
+
+        if(!Is_citizen_present(citizen)){
+            Citizen_record.add(citizen);
+            System.out.println("Registered Successfully");
+        }
+
+        else{
+            System.out.println("ID Already registered , Registration unsuccessful");
+        }
+    }
+
     void search_slots_by_hospital(){
 
         Scanner sc= new Scanner(System.in);
@@ -142,6 +183,19 @@ public class Cowin {
                 System.out.println("Day: "+slot.getDay()+" | Vaccine: "+slot.getVaccine().getName()+" | Available Qty :"+slot.getQty());
             }
         }
+    }
+
+    boolean Is_citizen_present(Citizen citizen){
+
+        int citizen_record_size = Citizen_record.size();
+
+        for (int i = 0; i < citizen_record_size; i++) {
+
+            if(citizen.getId().equals(Citizen_record.get(i).getId())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     boolean Is_Vaccine_present(Vaccine vaccine){
