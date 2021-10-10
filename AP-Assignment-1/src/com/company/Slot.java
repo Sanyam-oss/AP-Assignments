@@ -31,6 +31,8 @@ public class Slot {
         return qty;
     }
 
+    void setQty(int x){ this.qty = x ;}
+
     Vaccine getVaccine(){
         return vaccine;
     }

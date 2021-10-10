@@ -34,11 +34,15 @@ class Main {
             }
 
             if(query==5){
-               // cowin.book_slot();
+               cowin.book_slot();
             }
 
             if(query==6){
                 cowin.search_slots_by_hospital();
+            }
+
+            if(query==7){
+                cowin.check_Vaccination_status();
             }
 
             if(query==8){ break;}

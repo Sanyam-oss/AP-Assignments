@@ -32,8 +32,26 @@ public class Hospital {
         for(int i=0;i<Slots_filled.size();i++){
 
             Slot slot = Slots_filled.get(i);
-            System.out.println("Day: "+slot.getDay()+" | Vaccine: "+slot.getVaccine().getName()+" | Available Qty :"+slot.getQty());
+            if(slot.getQty()==0){
+                System.out.println(i+". Day: "+slot.getDay()+" | Vaccine: "+slot.getVaccine().getName()+" | Available Qty : Fully booked");
+            }
+            else{
+            System.out.println(i+". Day: "+slot.getDay()+" | Vaccine: "+slot.getVaccine().getName()+" | Available Qty :"+slot.getQty());
+            }
         }
+    }
+
+    int getPincode(){
+        return this.Pincode;}
+
+    String getName(){
+        return this.name;}
+
+    int getHospital_id(){
+        return this.Hospital_id;}
+
+    ArrayList<Slot> getSlots(){
+        return this.Slots_filled;
     }
 
     boolean is_equal(Hospital x){

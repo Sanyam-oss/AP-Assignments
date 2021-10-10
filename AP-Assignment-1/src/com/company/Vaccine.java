@@ -27,6 +27,8 @@ public class Vaccine {
     String getName(){
         return this.name;
     }
+    int getDoses(){return this.doses;}
+    int getGap(){return this.gap;}
 
 
 }
