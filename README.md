@@ -1,12 +1,12 @@
 # AP-Assignments
 
-Name - Sanyam Goyal
+**Name - Sanyam Goyal**
 
-Roll Number - 2020116
+**Roll Number - 2020116**
 
-Section - A
+**Section - A**
 
-### Work Log :
+#### Work Log :
 
 > Assignment 1 Submitted on 10th October .
 
