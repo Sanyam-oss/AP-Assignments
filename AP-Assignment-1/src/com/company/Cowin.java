@@ -32,7 +32,7 @@ public class Cowin {
 
         Citizen citizen = Find_citizen(Id);
         if(citizen.getVaccinationStatus()==2 ) {
-            System.out.println("Fully vaccinated No books available");
+            System.out.println("Fully vaccinated No bookings available");
             return;
         }
 
@@ -55,16 +55,6 @@ public class Cowin {
         }
 
         if(choice==3){return;}
-
-
-
-
-
-
-
-
-
-
     }
 
     void Enter_Slots(){
@@ -258,7 +248,8 @@ public class Cowin {
                 if (!Hosp_shown.contains(hospital)){
                     Hosp_shown.add(hospital);
                     System.out.println(hospital.getHospital_id() + " " + hospital.getName());
-                    hosp_avail = true;}
+                    hosp_avail = true;
+                }
             }
         }
 

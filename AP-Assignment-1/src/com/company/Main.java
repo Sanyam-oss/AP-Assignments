@@ -45,14 +45,9 @@ class Main {
                 cowin.check_Vaccination_status();
             }
 
-            if(query==8){ break;}
-
+            if(query==8){ break; }
         }
-
-
-
     }
-
 }
 
 
