@@ -33,12 +33,15 @@ class Main {
                 cowin.Enter_Slots();
             }
 
+            if(query==5){
+               // cowin.book_slot();
+            }
+
             if(query==6){
                 cowin.search_slots_by_hospital();
             }
 
             if(query==8){ break;}
-
 
         }
 

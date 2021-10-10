@@ -5,14 +5,18 @@ import java.util.*;
 public class Cowin {
 
     private static int hospital_id ;
-    private ArrayList<Vaccine> Vaccines_record = new ArrayList<Vaccine>();
-    private ArrayList<Hospital> Hospital_record = new ArrayList<Hospital>();
-    private ArrayList<Citizen> Citizen_record = new ArrayList<Citizen>();
-    private ArrayList<Slot> Slots_Available = new ArrayList<Slot>();
+    private ArrayList<Vaccine> Vaccines_record ;
+    private ArrayList<Hospital> Hospital_record ;
+    private ArrayList<Citizen> Citizen_record ;
+    private ArrayList<Slot> Slots_Available ;
 
     Cowin(){
 
         hospital_id = 100000;
+        Vaccines_record = new ArrayList<Vaccine>();
+        Hospital_record = new ArrayList<Hospital>();
+        Citizen_record = new ArrayList<Citizen>();
+        Slots_Available = new ArrayList<Slot>();
 
     }
 
@@ -56,6 +60,7 @@ public class Cowin {
     void add_Slot(int id ,int day,int qty,int vaccine_ind){
 
         Slot slot = new Slot(id,day,qty,Vaccines_record.get(vaccine_ind));
+        Hospital_record.get(id-100000).add_slot(slot);
         Slots_Available.add(slot);
         slot.print_details();
     }
@@ -106,7 +111,7 @@ public class Cowin {
         System.out.print("Pincode: ");
         int pincode = sc.nextInt();
 
-        if(pincode<0){
+        if( pincode<0 || pincode>=1000000 ){
             System.out.println("Invalid Pincode");}
 
         else{
@@ -175,14 +180,12 @@ public class Cowin {
         System.out.print("Enter Hospital Id: ");
         int id = sc.nextInt();
 
-        for(int i=0;i<Slots_Available.size();i++){
-
-            Slot slot = Slots_Available.get(i);
-
-            if(slot.getHospital_id()==id){
-                System.out.println("Day: "+slot.getDay()+" | Vaccine: "+slot.getVaccine().getName()+" | Available Qty :"+slot.getQty());
-            }
+        if(id<100000 || id>=hospital_id){
+            System.out.println("Not Valid Id");
+            return;
         }
+
+        Hospital_record.get(id-100000).print_slots();
     }
 
     boolean Is_citizen_present(Citizen citizen){
