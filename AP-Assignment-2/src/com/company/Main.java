@@ -33,5 +33,19 @@ public class Main {
             }
 
         }
+
+        String[] x = new String[1];
+
+        if(x[0].isEmpty()){
+            System.out.println("1");
+        }
+
+        x[0] = Reader.reader.readLine();
+        if(x[0].isEmpty()){
+            System.out.println("1");
+        }
+        else{
+            System.out.println(x[0]);
+        }
     }
 }

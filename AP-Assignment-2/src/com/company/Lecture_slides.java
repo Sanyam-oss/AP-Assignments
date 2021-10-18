@@ -32,6 +32,6 @@ public class Lecture_slides implements Material {
         String date = String.format("%tc", this.Upload_Date );
         System.out.println("Date of Upload : "+date);
         System.out.println("Uploaded by : Instructor_"+this.instructor_id);
-        System.out.println();
+        System.out.println("------------------------------------------------------------------");
     }
 }

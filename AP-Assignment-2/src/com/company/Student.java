@@ -10,4 +10,8 @@ public class Student {
         this.id = id ;
         id++;
     }
+
+    int getId(){
+        return this.id;
+    }
 }

@@ -22,12 +22,20 @@ public class Backpack {
 
             int choice = Reader.nextint();
 
-            if (choice == 1) {
+            if ( choice == 1 ) {
                 add_class_Material(course, instructor_id);
             }
 
-            if (choice == 2) {
+            if ( choice == 2 ) {
                 add_Assessments(course, instructor_id);
+            }
+
+            if ( choice == 3 ){
+                course.show_material();
+            }
+
+            if( choice == 4 ){
+                course.show_Assessments();
             }
 
             if( choice == 8){
@@ -61,15 +69,18 @@ public class Backpack {
                 course.show_material();
             }
 
-//            if (choice == 2) {
-//                add_Assessments(course, instructor_id);
-//            }
-//
-//            if( choice == 8){
-//                Instructor instructor = course.getInstructors_List().get(instructor_id);
-//                add_comments(course,instructor);
-//            }
-//
+            if (choice == 2) {
+                course.show_Assessments();
+            }
+
+            if( choice==3 ){
+                submit_assessments(course,student_id);
+            }
+
+            if( choice==4 ){
+                View_grades(course,student_id);
+            }
+
             if(choice==7){
                 break;
             }
@@ -117,11 +128,11 @@ public class Backpack {
                 Date upload_date = new Date();
                 course.add_lecture_video(topic,Filename,instructor_id,upload_date);}
 
-            else{System.out.println("Invalid File type");}
+            else{System.out.println("Invalid File type - must be .mp4 format ");}
         }
     }
 
-    void add_Assessments(Course course , int instructor_id ) throws Exception {
+    void add_Assessments( Course course , int instructor_id ) throws Exception {
 
         System.out.println("1. Add Assignment ");
         System.out.println("2. Add Quiz ");
@@ -155,6 +166,30 @@ public class Backpack {
         Date upload_date = new Date();
 
         course.add_comment(comment , user , upload_date );
+    }
+
+    void submit_assessments(  Course course , int student_id ) throws Exception{
+
+        ArrayList<Assessment>assessments = course.Pending_assessments(student_id);
+
+        if(assessments.size()==0){
+            System.out.println("No pending Assignments , Hurray :) ");
+            return;
+        }
+
+        System.out.print("Enter Id of Assessment : ");
+
+        int assessment_id = Reader.nextint();
+        Assessment assessment = assessments.get(assessment_id);
+        assessment.take_submission(student_id);
+    }
+
+    void View_grades(Course course , int student_id ){
+
+        System.out.println("GRADED ASSESSMENTS ");
+        course.Graded_assessments(student_id);
+        System.out.println("UNGRADED ASSESSMENTS ");
+        course.Ungraded_assessments(student_id);
     }
 
     void login() throws Exception {
@@ -240,8 +275,7 @@ public class Backpack {
     boolean is_Valid_name(String name){
 
         int n = name.length();
-
-        if((name.length()>4) && (name.substring(n-4)).equals(".mp4")) return true;
+        if((n>=4) && (name.substring(n-4)).equals(".mp4")) return true;  // .mp4 only is valid also
         return false;
     }
 

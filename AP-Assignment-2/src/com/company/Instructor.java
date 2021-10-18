@@ -10,4 +10,8 @@ public class Instructor implements User {
         id++;
     }
 
+    int getId(){
+        return this.id;
+    }
+
 }
