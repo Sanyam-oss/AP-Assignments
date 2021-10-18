@@ -62,3 +62,6 @@ public class Hospital {
         return false;
     }
 }
+
+// Use static hospital_id variable here insted of in cowin
+// encapsulation

@@ -514,3 +514,5 @@ public class Cowin {
         System.out.println("--------------------------------------------");
     }
 }
+
+// static variable redundant here use in hospital class

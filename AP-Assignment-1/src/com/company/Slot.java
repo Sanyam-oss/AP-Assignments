@@ -38,3 +38,5 @@ public class Slot {
     }
 
 }
+
+// Fine

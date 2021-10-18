@@ -54,3 +54,5 @@ public class Citizen {
 // 0 : Registered
 // 1 : Partially vaccinated
 // 2 : Fully vaccinated
+
+// Encapsulation
