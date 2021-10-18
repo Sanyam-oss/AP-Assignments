@@ -69,8 +69,20 @@ public class Course {
         }
         int index = 0 ;
         for ( Assessment assessment : Course_Assessments ) {
-            System.out.print("ID: " + index++);
+            System.out.print("ID:" + index++);
             assessment.print_details();
+        }
+    }
+
+    void show_course_comments(){
+
+        if(Course_comments.size()==0){
+            System.out.println("No Comments Added yet in the discussion forum ");
+            return;
+        }
+
+        for ( Comment comment : Course_comments ) {
+            comment.print_comment();
         }
     }
     void add_student(){
@@ -91,12 +103,29 @@ public class Course {
         int index=0;
         for(Assessment assessment:Course_Assessments){
             if(assessment.is_pending(id)){
+                if(index==0){
+                    System.out.println("Pending Assignments : ");
+                }
                 valid_assessments.add(assessment);
-                System.out.print("ID : "+index++);
+                System.out.print("ID: "+index++);
                 assessment.print_details();
             }
         }
         return valid_assessments;
+    }
+
+    ArrayList<Assessment> Open_assessments(){
+
+        ArrayList<Assessment>open_assessments = new ArrayList<>();
+        int index=0;
+        for(Assessment assessment:Course_Assessments){
+            if(assessment.is_open()){
+                open_assessments.add(assessment);
+                System.out.print("ID : "+index++);
+                assessment.print_details();
+            }
+        }
+        return open_assessments;
     }
 
     void Graded_assessments(int id){
@@ -121,11 +150,10 @@ public class Course {
     String getName(){
         return this.Name;
     }
-
+    Assessment getAssessment(int id){ return Course_Assessments.get(id) ;}
     ArrayList<Instructor>getInstructors_List(){
         return this.Instructors_List;
     }
-
     ArrayList<Student>getStudents_List(){
         return this.Students_List;
     }

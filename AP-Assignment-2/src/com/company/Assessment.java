@@ -14,5 +14,15 @@ public interface Assessment {
 
     String getSubmission(int id);
 
+    int[] show_submissions(int total_students) ;
+
+    double getMaxmarks();
+
+    void update_grades( double marks , int student_id , int grader_id );
+
+    boolean is_open();
+
+    void close();
+
 
 }

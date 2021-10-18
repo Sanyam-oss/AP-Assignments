@@ -3,15 +3,16 @@ import java.util.*;
 
 public class Instructor implements User {
 
-    private static int id;
+    private static int instructors = 0 ;
+    private int id ;
 
     Instructor(){
-        this.id = id ;
-        id++;
+        this.id = instructors ;
+        instructors++;
     }
 
-    int getId(){
-        return this.id;
+    @Override
+    public void print_role(){
+        System.out.println("Student_"+this.id);
     }
-
 }

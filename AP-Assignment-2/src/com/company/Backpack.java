@@ -38,6 +38,18 @@ public class Backpack {
                 course.show_Assessments();
             }
 
+            if( choice==5 ){
+                grade_assessments(course , instructor_id);
+            }
+
+            if( choice==6 ){
+                close_assessment(course);
+            }
+
+            if ( choice==7 ){
+                course.show_course_comments();
+            }
+
             if( choice == 8){
                 Instructor instructor = course.getInstructors_List().get(instructor_id);
                 add_comments(course,instructor);
@@ -46,10 +58,7 @@ public class Backpack {
             if(choice==9){
                 break;
             }
-
-
         }
-
     }
 
     void Student_login(Course course) throws Exception{
@@ -81,12 +90,53 @@ public class Backpack {
                 View_grades(course,student_id);
             }
 
+            if (choice==5 ){
+                course.show_course_comments();
+            }
+
+            if(choice==6){
+                Student student = course.getStudents_List().get(student_id);
+                add_comments(course,student);
+            }
+
             if(choice==7){
                 break;
             }
         }
 
 
+    }
+
+    void grade_assessments(Course course , int instructor_id) throws Exception{
+
+        course.show_Assessments();
+
+        System.out.print("Enter ID of Assessment to view submissions : ");
+        int assessment_id = Reader.nextint();
+
+        Assessment assessment = course.getAssessment(assessment_id);
+
+        System.out.println("Choose from below Ungraded Submissions : ");
+        int[] util = assessment.show_submissions(course.getStudents_List().size());
+
+        if(util==null){ return ; }
+
+        int ind  = Reader.nextint();
+
+        System.out.println("Submission : "+ assessment.getSubmission(util[ind]));
+        System.out.println("---------------------------------------------------------");
+
+        System.out.println("Max Marks : "+ assessment.getMaxmarks());
+        System.out.print("Enter Marks Scored : ");
+
+        double marks = Reader.nextdouble();
+
+        if( marks > assessment.getMaxmarks()){
+            System.out.println("Thanks for the kindness but Marks scored must be <= Max.marks");
+            return;
+        }
+
+        assessment.update_grades(marks , util[ind] , instructor_id );
     }
 
     void add_class_Material(Course course , int instructor_id ) throws Exception{
@@ -168,6 +218,15 @@ public class Backpack {
         course.add_comment(comment , user , upload_date );
     }
 
+    void close_assessment(Course course) throws Exception{
+
+        ArrayList<Assessment>open_assessments = course.Open_assessments();
+        System.out.print("Enter ID to be closed : ");
+        int ind = Reader.nextint();
+        Assessment assessment = open_assessments.get(ind);
+        assessment.close();
+    }
+
     void submit_assessments(  Course course , int student_id ) throws Exception{
 
         ArrayList<Assessment>assessments = course.Pending_assessments(student_id);
@@ -188,6 +247,7 @@ public class Backpack {
 
         System.out.println("GRADED ASSESSMENTS ");
         course.Graded_assessments(student_id);
+        System.out.println();
         System.out.println("UNGRADED ASSESSMENTS ");
         course.Ungraded_assessments(student_id);
     }
@@ -281,7 +341,7 @@ public class Backpack {
 
     void display_menu(){
 
-        System.out.println("Welcome to Backpack");
+        System.out.println("WELCOME TO BACKPACK !!!");
         System.out.println("1. Add Course");
         System.out.println("2. Register Instructor");
         System.out.println("3. Register Student");

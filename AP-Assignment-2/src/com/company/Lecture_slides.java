@@ -24,7 +24,7 @@ public class Lecture_slides implements Material {
         System.out.println("Title : " + this.Topic );
 
         for(int i=0;i<Contents.length;i++){
-            System.out.println("Slide "+i+1+": "+Contents[i]);
+            System.out.println("Slide "+(i+1)+": "+Contents[i]);
         }
 
         System.out.println("Number of Slides : "+Number_of_slides);

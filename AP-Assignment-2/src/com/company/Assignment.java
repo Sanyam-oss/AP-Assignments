@@ -11,7 +11,7 @@ public class Assignment implements Assessment {
     private boolean status;
     private boolean[] submission_status;
     private String[] submissions;
-    private int[] Grades;
+    private double[] Grades;
     private int[] Grader;
 
 
@@ -25,7 +25,7 @@ public class Assignment implements Assessment {
         this.submission_status=new boolean[1000];
         this.submissions = new String[1000];
         this.Grader = new int[1000];
-        this.Grades = new int[1000];                 // In our case 3 is enough
+        this.Grades = new double[1000];                 // In our case 3 is enough
         Arrays.fill(Grades,-1);
 
         // if submission_status[i]==false , i hasn't submitted
@@ -55,7 +55,7 @@ public class Assignment implements Assessment {
     @Override
     public void take_submission(int id) throws Exception{
 
-        System.out.print( " Enter Filename of Assignment : ");
+        System.out.print( "Enter Filename of Assignment : ");
         String filename = Reader.reader.readLine();
 
         int n = filename.length();
@@ -67,6 +67,52 @@ public class Assignment implements Assessment {
         }
 
         System.out.println("Invalid file type - must be .zip format ");
+    }
+
+    @Override
+    public int[] show_submissions(int students){
+
+        int[] To_be_graded = new int[students];
+
+        int index = 0 ;
+        boolean x = false ;
+
+        for(int i=0 ; i<students ; i++){
+
+            if(submission_status[i]){
+
+                if(Grades[i]==-1) {
+                    System.out.println(index + ". Student_" + i);
+                    To_be_graded[index] = i;
+                    index++;
+                }
+                x = true;
+            }
+        }
+
+        if(index==0 && (x==true) ){
+            System.out.println("All assignments graded , Ahead of your time :) ");
+            return null;
+        }
+
+        else if(index == 0 && (x==false)){
+            System.out.println("No submissions done for this assessment ");
+            return null;
+        }
+
+        return To_be_graded;
+    }
+
+    @Override
+    public void update_grades(double marks , int student_id , int instructor_id){
+
+        Grades[student_id]=marks;
+        Grader[student_id]=instructor_id;
+    }
+
+    @Override
+    public void close(){
+        this.status=false;
     }
 
     @Override
@@ -82,5 +128,15 @@ public class Assignment implements Assessment {
     @Override
     public String getSubmission(int id){
         return submissions[id];
+    }
+
+    @Override
+    public double getMaxmarks(){
+        return this.max_marks;
+    }
+
+    @Override
+    public boolean is_open(){
+        return this.status;
     }
 }
