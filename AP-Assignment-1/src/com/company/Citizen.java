@@ -16,7 +16,7 @@ public class Citizen {
         this.Name=Name;
         this.no_of_doses_taken=0;
         this.due_date=0;
-        this.vaccine_taken=null;
+        this.vaccine_taken=null;          // Association
     }
 
     void print_details(){
@@ -40,7 +40,7 @@ public class Citizen {
 
     void setVaccine_taken(Vaccine vaccine){
         this.vaccine_taken=vaccine;
-    }
+    }   // Association
 
     void setNo_of_doses_taken(int x){
         this.no_of_doses_taken=x;

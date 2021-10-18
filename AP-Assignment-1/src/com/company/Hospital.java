@@ -22,7 +22,7 @@ public class Hospital {
 
     void add_slot(Slot slot){
         Slots_filled.add(slot);
-    }
+    }   // dependency
 
     void print_slots(){
 

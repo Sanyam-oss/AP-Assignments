@@ -7,7 +7,7 @@ public class Slot {
     private int qty;
     private Vaccine vaccine;
 
-    Slot(int hospital_id , int day,int qty,Vaccine vaccine){
+    Slot(int hospital_id , int day,int qty,Vaccine vaccine){           // Association
         this.hospital_id = hospital_id;
         this.day = day ;
         this.qty = qty ;

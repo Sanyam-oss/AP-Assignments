@@ -5,25 +5,24 @@ import java.util.*;
 public class Cowin {
 
     private static int hospital_id ;
-    private ArrayList<Vaccine> Vaccines_record ;
+    private ArrayList<Vaccine> Vaccines_record ;       // Encapsulation
     private ArrayList<Hospital> Hospital_record ;
     private ArrayList<Citizen> Citizen_record ;
     private ArrayList<Slot> Slots_Available ;
 
     Cowin(){
 
-        hospital_id = 100000;
-        Vaccines_record = new ArrayList<Vaccine>();
+        hospital_id = 100000;                               // Starting Hospital_id from here in sequence
+        Vaccines_record = new ArrayList<Vaccine>();         // Composition
         Hospital_record = new ArrayList<Hospital>();
         Citizen_record = new ArrayList<Citizen>();
         Slots_Available = new ArrayList<Slot>();
-
     }
 
     void book_slot(){
 
         Scanner sc= new Scanner(System.in);
-        // Extra line sc.next()
+        //sc.next();
         System.out.print("Enter Unique Id: ");
         String Id = sc.nextLine();
 

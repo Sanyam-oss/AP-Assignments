@@ -18,7 +18,7 @@ class Main {
             int query = sc.nextInt();
 
             if(query==1){
-                cowin.Register_Vaccine();
+                cowin.Register_Vaccine();              // Abstraction
             }
 
             if(query==2){
