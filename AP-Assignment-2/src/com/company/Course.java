@@ -51,20 +51,71 @@ public class Course {
 
     void show_material(){
 
+        if(Course_Materials.size()==0){
+            System.out.println("No Class Material Uploaded yet");
+            return;
+        }
+
         for ( Material material : Course_Materials ) {
             material.print_details();
         }
-
     }
 
+    void show_Assessments(){
+
+        if(Course_Assessments.size()==0){
+            System.out.println("No Assessments Uploaded yet");
+            return;
+        }
+        int index = 0 ;
+        for ( Assessment assessment : Course_Assessments ) {
+            System.out.print("ID: " + index++);
+            assessment.print_details();
+        }
+    }
     void add_student(){
         Student student = new Student();
         Students_List.add(student);
+        System.out.println("Student_"+ (Students_List.size()-1) +" registered successfully in "+this.Name+" course");
     }
 
     void add_Instructor(){
         Instructor instructor = new Instructor();
         Instructors_List.add(instructor);
+        System.out.println("Instructor_" +(Instructors_List.size()-1) + " registered successfully in "+this.Name+" course");
+    }
+
+    ArrayList<Assessment> Pending_assessments(int id){
+
+        ArrayList<Assessment>valid_assessments = new ArrayList<>();
+        int index=0;
+        for(Assessment assessment:Course_Assessments){
+            if(assessment.is_pending(id)){
+                valid_assessments.add(assessment);
+                System.out.print("ID : "+index++);
+                assessment.print_details();
+            }
+        }
+        return valid_assessments;
+    }
+
+    void Graded_assessments(int id){
+
+        for(Assessment assessment:Course_Assessments){
+            if(assessment.is_submitted(id) && assessment.is_graded(id)){
+                assessment.print_grades(id);
+            }
+        }
+    }
+
+    void Ungraded_assessments(int id){
+
+        for(Assessment assessment:Course_Assessments){
+            if(assessment.is_submitted(id) && (!assessment.is_graded(id))){
+                System.out.println("Submission : "+assessment.getSubmission(id));
+                System.out.println("------------------------------------------------------");
+            }
+        }
     }
 
     String getName(){
