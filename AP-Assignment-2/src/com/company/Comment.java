@@ -4,9 +4,9 @@ import java.util.*;
 
 public class Comment {
 
-    private String Comment ;
-    private Date Upload_Date;
-    private User user;
+    private final String Comment ;
+    private final Date Upload_Date;
+    private final User user;
 
     Comment(String comment , User user , Date date ){
 
@@ -20,7 +20,7 @@ public class Comment {
         System.out.print(this.Comment+" - ");
         this.user.print_role();
         String date = String.format("%tc", this.Upload_Date );
-        System.out.println("Date of Upload : "+date);
+        System.out.println(date);
         System.out.println("---------------------------------------------");
 
     }

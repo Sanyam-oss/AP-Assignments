@@ -4,11 +4,11 @@ import java.util.*;
 public class Course {
 
     private final String Name;
-    private ArrayList<Instructor>Instructors_List;
-    private ArrayList<Student>Students_List;
-    private ArrayList<Material>Course_Materials;
-    private ArrayList<Assessment>Course_Assessments;
-    private ArrayList<Comment>Course_comments;
+    private final ArrayList<Instructor>Instructors_List;
+    private final ArrayList<Student>Students_List;
+    private final ArrayList<Material>Course_Materials;
+    private final ArrayList<Assessment>Course_Assessments;
+    private final ArrayList<Comment>Course_comments;
 
     Course(String Name){
         this.Name = Name;
@@ -86,6 +86,7 @@ public class Course {
             comment.print_comment();
         }
     }
+
     void add_student(){
         Student student = new Student();
         Students_List.add(student);

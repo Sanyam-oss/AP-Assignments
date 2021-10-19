@@ -1,19 +1,17 @@
 package com.company;
 
 import java.util.*;
-import java.io.*;
 
 public class Assignment implements Assessment {
 
-    private String problem;
-    private double max_marks;
-    private int instructor_id;
-    private boolean status;
-    private boolean[] submission_status;
-    private String[] submissions;
-    private double[] Grades;
-    private int[] Grader;
-
+    private final String problem ;
+    private final double max_marks ;
+    private final int instructor_id ;
+    private boolean status ;
+    private final boolean[] submission_status ;
+    private final String[] submissions ;
+    private final double[] Grades ;
+    private final int[] Grader ;
 
     Assignment(String problem,double max_marks,int instructor_id){
 
@@ -30,7 +28,6 @@ public class Assignment implements Assessment {
 
         // if submission_status[i]==false , i hasn't submitted
         // 1000 max_strength of classroom - assumption
-
     }
 
     @Override
@@ -49,7 +46,7 @@ public class Assignment implements Assessment {
 
     @Override
     public boolean is_pending(int id){
-        return (this.status==true && (!this.submission_status[id]));
+        return (this.status && (!this.submission_status[id]));
     }
 
     @Override
@@ -63,6 +60,7 @@ public class Assignment implements Assessment {
         if((n>=4) && (filename.substring(n-4)).equals(".zip")){
             this.submissions[id] = filename;
             this.submission_status[id]=true;
+            System.out.println("Submission Successful");
             return;
         }
 
@@ -90,12 +88,12 @@ public class Assignment implements Assessment {
             }
         }
 
-        if(index==0 && (x==true) ){
-            System.out.println("All assignments graded , Ahead of your time :) ");
+        if(index==0 && x ){
+            System.out.println("All submissions graded for this Assignment  , Ahead of your time :) ");
             return null;
         }
 
-        else if(index == 0 && (x==false)){
+        else if(index == 0 && (!x)){
             System.out.println("No submissions done for this assessment ");
             return null;
         }

@@ -3,15 +3,15 @@ import java.util.*;
 
 public class Backpack {
 
-    private final ArrayList<Course>courses;    // Assuming multiple courses can be there
+    private final ArrayList<Course>courses;              // Assuming multiple courses can be there
 
     Backpack(){
         courses = new ArrayList<>();
-    }
+    }          // Composition
 
     void Instructor_login(Course course) throws Exception{
 
-        if(course.display_Instructors()==false){ return ; }
+        if(!course.display_Instructors()){ return ; }
         System.out.print("Choose Id: ");
         int instructor_id = Reader.nextint();
 
@@ -64,7 +64,7 @@ public class Backpack {
 
     void Student_login(Course course) throws Exception{
 
-        if(course.display_Students()==false){return;}
+        if(!course.display_Students()){return;}
         System.out.print("Choose Id: ");
         int student_id = Reader.nextint();
 
@@ -105,8 +105,6 @@ public class Backpack {
                 break;
             }
         }
-
-
     }
 
     void grade_assessments(Course course , int instructor_id) throws Exception{
@@ -160,6 +158,7 @@ public class Backpack {
 
             String[] content = new String[n] ;
             System.out.println("Contents of Slides");
+
             for( int i=1 ; i<=n ; i++ ){
                 System.out.print("Content of Slide "+i+" : ");
                 content[i-1]=Reader.reader.readLine();
@@ -231,15 +230,16 @@ public class Backpack {
     void close_assessment(Course course) throws Exception{
 
         ArrayList<Assessment>open_assessments = course.Open_assessments();
+
         if(open_assessments.size()==0){
             System.out.println("No Open Assessments present");
             return ;
         }
+
         System.out.print("Enter ID to be closed : ");
         int ind = Reader.nextint();
         Assessment assessment = open_assessments.get(ind);
         assessment.close();
-
     }
 
     void submit_assessments(  Course course , int student_id ) throws Exception{
@@ -247,7 +247,7 @@ public class Backpack {
         ArrayList<Assessment>assessments = course.Pending_assessments(student_id);
 
         if(assessments.size()==0){
-            System.out.println("No pending Assignments , Hurray :) ");
+            System.out.println("No pending Assessments , Hurray :) ");
             return;
         }
 
@@ -256,7 +256,6 @@ public class Backpack {
         int assessment_id = Reader.nextint();
         Assessment assessment = assessments.get(assessment_id);
         assessment.take_submission(student_id);
-        System.out.println("Submission Successfully");
     }
 
     void View_grades(Course course , int student_id ){
@@ -330,22 +329,18 @@ public class Backpack {
             System.out.println("Course Not Registered");
             return;
         }
-
         course.add_student();         // Can add attributes to Student like name,etc.
     }
 
     Course find_course(String course_name){
 
         Course req_course = null ;
-
         for (Course course : courses) {
-
             if (course.getName().equals(course_name)) {
                 req_course = course;
                 break;
             }
         }
-
         return req_course;
     }
 
@@ -358,7 +353,7 @@ public class Backpack {
     void display_menu(){
 
         System.out.println();
-        System.out.println("WELCOME TO BACKPACK !!!");
+        System.out.println("WELCOME TO BACKPACK");
         System.out.println("1. Add Course");
         System.out.println("2. Register Instructor");
         System.out.println("3. Register Student");
@@ -399,5 +394,3 @@ public class Backpack {
         System.out.println("7. Logout");
     }
 }
-
-// instructor.view(this) in course page

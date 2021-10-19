@@ -4,14 +4,14 @@ import java.util.*;
 
 public class Quiz implements Assessment {
 
-    private String question ;
-    private double max_marks;
-    private int instructor_id;
+    private final String question ;
+    private final double max_marks;
+    private final int instructor_id;
     private boolean status;
-    private boolean[] submission_status;
-    private String[] submissions;
-    private double[] Grades;
-    private int[] Grader;
+    private final boolean[] submission_status;
+    private final String[] submissions;
+    private final double[] Grades;
+    private final int[] Grader;
 
     Quiz(String ques ,int instructor_id){
 
@@ -42,7 +42,7 @@ public class Quiz implements Assessment {
 
     @Override
     public boolean is_pending(int id){
-        return (this.status==true && (!this.submission_status[id]));
+        return (this.status && (!this.submission_status[id]));
     }
 
     @Override
@@ -74,12 +74,12 @@ public class Quiz implements Assessment {
             }
         }
 
-        if(index==0 && (x==true) ){
+        if(index==0 && (x) ){
             System.out.println("All Assignments graded for this Assessment , Ahead of your time :) ");
             return null;
         }
 
-        else if(index == 0 && (x==false)){
+        else if(index == 0 && (!x)){
             System.out.println("No Submissions done for this assessment ");
             return null;
         }

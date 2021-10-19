@@ -23,14 +23,12 @@ public class Main {
                 classroom.add_Student();}
 
             if(query==4){
-
                 classroom.login();
             }
 
             if(query==5){
                 break;
             }
-
         }
     }
 }

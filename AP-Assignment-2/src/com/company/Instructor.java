@@ -1,10 +1,9 @@
 package com.company;
-import java.util.*;
 
 public class Instructor implements User {
 
     private static int instructors = 0 ;
-    private int id ;
+    private final int id ;
 
     Instructor(){
         this.id = instructors ;
