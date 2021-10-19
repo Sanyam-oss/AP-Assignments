@@ -17,7 +17,7 @@ public class Comment {
 
     public void print_comment(){
 
-        System.out.print(this.Comment);
+        System.out.print(this.Comment+" - ");
         this.user.print_role();
         String date = String.format("%tc", this.Upload_Date );
         System.out.println("Date of Upload : "+date);

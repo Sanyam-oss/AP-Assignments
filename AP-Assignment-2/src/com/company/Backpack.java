@@ -11,13 +11,14 @@ public class Backpack {
 
     void Instructor_login(Course course) throws Exception{
 
-        course.display_Instructors();
+        if(course.display_Instructors()==false){ return ; }
         System.out.print("Choose Id: ");
         int instructor_id = Reader.nextint();
 
         while(true) {
 
-            System.out.println("Welcome Instructor_" + instructor_id);
+            System.out.println();
+            System.out.println("Welcome Instructor_" + instructor_id + " !!");
             display_Instructor_menu();
 
             int choice = Reader.nextint();
@@ -63,13 +64,14 @@ public class Backpack {
 
     void Student_login(Course course) throws Exception{
 
-        course.display_Students();
+        if(course.display_Students()==false){return;}
         System.out.print("Choose Id: ");
         int student_id = Reader.nextint();
 
         while(true) {
 
-            System.out.println("Welcome Student_" + student_id);
+            System.out.println();
+            System.out.println("Welcome Student_" + student_id+" !!");
             display_Student_menu();
 
             int choice = Reader.nextint();
@@ -109,7 +111,9 @@ public class Backpack {
 
     void grade_assessments(Course course , int instructor_id) throws Exception{
 
-        course.show_Assessments();
+        boolean is_assessments_present = course.show_Assessments();
+
+        if(!is_assessments_present){ return ; }
 
         System.out.print("Enter ID of Assessment to view submissions : ");
         int assessment_id = Reader.nextint();
@@ -163,6 +167,7 @@ public class Backpack {
 
             Date upload_date = new Date();
             course.add_lecture_slides(topic,content,instructor_id,upload_date);
+            System.out.println("Lecture Slides added Successfully");
         }
 
         else if(query==2){
@@ -176,7 +181,9 @@ public class Backpack {
             if(is_Valid_name(Filename)){
 
                 Date upload_date = new Date();
-                course.add_lecture_video(topic,Filename,instructor_id,upload_date);}
+                course.add_lecture_video(topic,Filename,instructor_id,upload_date);
+                System.out.println("Lecture Video added Successfully");
+            }
 
             else{System.out.println("Invalid File type - must be .mp4 format ");}
         }
@@ -198,6 +205,7 @@ public class Backpack {
             double max_marks = Reader.nextint();
 
             course.add_Assignment(problem_statement,max_marks,instructor_id);
+            System.out.println("Assignment uploaded Successfully");
         }
 
         else if(query==2){
@@ -206,6 +214,7 @@ public class Backpack {
             String ques = Reader.reader.readLine();
 
             course.add_quiz(ques,instructor_id);
+            System.out.println("Quiz uploaded Successfully");
         }
     }
 
@@ -216,15 +225,21 @@ public class Backpack {
         Date upload_date = new Date();
 
         course.add_comment(comment , user , upload_date );
+        System.out.println("Comment added Successfully !");
     }
 
     void close_assessment(Course course) throws Exception{
 
         ArrayList<Assessment>open_assessments = course.Open_assessments();
+        if(open_assessments.size()==0){
+            System.out.println("No Open Assessments present");
+            return ;
+        }
         System.out.print("Enter ID to be closed : ");
         int ind = Reader.nextint();
         Assessment assessment = open_assessments.get(ind);
         assessment.close();
+
     }
 
     void submit_assessments(  Course course , int student_id ) throws Exception{
@@ -241,6 +256,7 @@ public class Backpack {
         int assessment_id = Reader.nextint();
         Assessment assessment = assessments.get(assessment_id);
         assessment.take_submission(student_id);
+        System.out.println("Submission Successfully");
     }
 
     void View_grades(Course course , int student_id ){
@@ -287,6 +303,7 @@ public class Backpack {
 
         Course course = new Course(Name);
         courses.add(course);
+        System.out.println(Name+" Course added Successfully");
     }
 
     void add_Instructor() throws Exception{   // Course name where u want to add an instructor
@@ -335,12 +352,12 @@ public class Backpack {
     boolean is_Valid_name(String name){
 
         int n = name.length();
-        if((n>=4) && (name.substring(n-4)).equals(".mp4")) return true;  // .mp4 only is valid also
-        return false;
+        return (n >= 4) && (name.substring(n - 4)).equals(".mp4");  // .mp4 only is valid also
     }
 
     void display_menu(){
 
+        System.out.println();
         System.out.println("WELCOME TO BACKPACK !!!");
         System.out.println("1. Add Course");
         System.out.println("2. Register Instructor");
@@ -351,7 +368,8 @@ public class Backpack {
 
     void display_login_menu(){
 
-        System.out.println("Welcome to Backpack");
+        System.out.println();
+        System.out.println("WELCOME TO BACKPACK");
         System.out.println("1. Enter as Instructor");
         System.out.println("2. Enter as Student");
         System.out.println("3. Exit");

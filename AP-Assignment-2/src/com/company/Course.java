@@ -61,17 +61,18 @@ public class Course {
         }
     }
 
-    void show_Assessments(){
+    boolean show_Assessments(){
 
         if(Course_Assessments.size()==0){
             System.out.println("No Assessments Uploaded yet");
-            return;
+            return false;
         }
         int index = 0 ;
         for ( Assessment assessment : Course_Assessments ) {
             System.out.print("ID:" + index++);
             assessment.print_details();
         }
+        return true;
     }
 
     void show_course_comments(){
@@ -141,7 +142,7 @@ public class Course {
 
         for(Assessment assessment:Course_Assessments){
             if(assessment.is_submitted(id) && (!assessment.is_graded(id))){
-                System.out.println("Submission : "+assessment.getSubmission(id));
+                System.out.println(" Submission : "+assessment.getSubmission(id));
                 System.out.println("------------------------------------------------------");
             }
         }
@@ -158,27 +159,29 @@ public class Course {
         return this.Students_List;
     }
 
-    void display_Instructors(){
+    boolean display_Instructors(){
 
         if(this.Instructors_List.size()==0){
             System.out.println("No Instructor Registered ");
-            return;
+            return false;
         }
 
         for(int i=0;i<this.Instructors_List.size();i++){
             System.out.println( i+".Instructor_Id_"+i);
         }
+        return true;
     }
 
-    void display_Students(){
+    boolean display_Students(){
 
         if(this.Students_List.size()==0){
-            System.out.println("No Instructor Registered ");
-            return;
+            System.out.println("No Student Registered ");
+            return false;
         }
 
         for(int i=0;i<this.Students_List.size();i++){
             System.out.println( i+".Student_Id_"+i);
         }
+        return true;
     }
 }

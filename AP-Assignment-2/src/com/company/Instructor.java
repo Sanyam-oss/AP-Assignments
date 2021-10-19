@@ -13,6 +13,6 @@ public class Instructor implements User {
 
     @Override
     public void print_role(){
-        System.out.println("Student_"+this.id);
+        System.out.println("Instructor_"+this.id);
     }
 }

@@ -75,12 +75,12 @@ public class Quiz implements Assessment {
         }
 
         if(index==0 && (x==true) ){
-            System.out.println("All assignments graded , Ahead of your time :) ");
+            System.out.println("All Assignments graded for this Assessment , Ahead of your time :) ");
             return null;
         }
 
         else if(index == 0 && (x==false)){
-            System.out.println("No submissions done for this assessment ");
+            System.out.println("No Submissions done for this assessment ");
             return null;
         }
 
