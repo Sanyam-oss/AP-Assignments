@@ -10,4 +10,4 @@
 
 > Assignment 1 Submitted on 10th October .
 
-> Assignment 2 will be uploaded soon ....
+> Assignment 2 Sumitted on 19th October .
