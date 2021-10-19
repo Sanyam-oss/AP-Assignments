@@ -8,6 +8,6 @@
 
 #### Work Log :
 
-> Assignment 1 Submitted on 10th October .
+> Assignment 1 Submitted on 10th October . [ COWIN PORTAL ]
 
-> Assignment 2 Sumitted on 19th October .
+> Assignment 2 Submitted on 19th October . [ CLASSROOM ]
