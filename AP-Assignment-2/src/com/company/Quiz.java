@@ -51,6 +51,7 @@ public class Quiz implements Assessment {
         System.out.print(this.question + " : ");
         this.submissions[id] = Reader.reader.readLine();
         this.submission_status[id]=true;
+        System.out.println("Submission successful");
     }
 
     @Override
