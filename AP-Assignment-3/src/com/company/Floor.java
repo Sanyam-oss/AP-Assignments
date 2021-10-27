@@ -15,8 +15,6 @@ public class Floor {
         return this.score_awarded;
     }
 
-    int getLocation(){ return this.location ; }
-
     int getNext_floor_position(){ return location ;}
 
     String type(){
