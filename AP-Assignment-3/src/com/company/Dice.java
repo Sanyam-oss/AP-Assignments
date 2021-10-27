@@ -6,13 +6,13 @@ public class Dice {
 
     private int num_face;
     private int face_value;
+    private static Random rand = new Random();
 
-    Dice(){
-        num_face = 2;
+    Dice(int num_face){
+        this.num_face = num_face;
     }
 
     void roll(){
-        Random rand = new Random();
         int curr_num = 1+rand.nextInt(num_face);
         this.setFace_value(curr_num);
     }
@@ -28,11 +28,11 @@ public class Dice {
         System.out.println("Invalid Number on Roll");
     }
 
-    int getFace_value(){
+    public int getFace_value(){
         return this.face_value;
     }
 
-    void setNum_face(int x){
-        if(x>0){  this.num_face=x; }
+    public void setNum_face(int x){
+        if(x > 0){  this.num_face=x ; }
     }
 }

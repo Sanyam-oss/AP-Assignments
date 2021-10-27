@@ -24,7 +24,6 @@ public class Main {
             int q = Reader.nextint();
             game.addfloor(q);
             System.out.println("Floor added Successfully");
-
         }
 
         System.out.print("Would you like to change Number of faces of dice [Y/N] ");
