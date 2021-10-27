@@ -11,11 +11,31 @@ public class Main {
 
         Game game = new Game(name);
 
-//        while(true){
-//        System.out.print("Would you like to add more similar floors in game track ? [Y/N]");
-//
+        while(true) {
 
-        //game.addFloor();
+            System.out.print("Would you like to add more similar floors in game track ? [Y/N] ");
+            String query = Reader.next();
+
+            if (query.equals("N")) {
+                break;
+            }
+
+            System.out.println("1 : Normal Snake | 2 : King Cobra | 3 : Empty ");
+            int q = Reader.nextint();
+            game.addfloor(q);
+            System.out.println("Floor added Successfully");
+
+        }
+
+        System.out.print("Would you like to change Number of faces of dice [Y/N] ");
+        String query = Reader.next();
+
+        if (query.equals("Y")) {
+            System.out.print("Enter Number of faces on dice : ");
+            int face = Reader.nextint();
+            game.change_dice(face);
+        }
+
 
         game.Initialise();
 

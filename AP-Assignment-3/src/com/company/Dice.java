@@ -4,11 +4,11 @@ import java.util.Random;
 
 public class Dice {
 
-    private final int num_face;
+    private int num_face;
     private int face_value;
 
     Dice(){
-        num_face = 3;
+        num_face = 2;
     }
 
     void roll(){
@@ -30,5 +30,9 @@ public class Dice {
 
     int getFace_value(){
         return this.face_value;
+    }
+
+    void setNum_face(int x){
+        if(x>0){  this.num_face=x; }
     }
 }

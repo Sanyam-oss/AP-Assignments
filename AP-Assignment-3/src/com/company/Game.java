@@ -7,7 +7,7 @@ public class Game {
     private final ArrayList<Floor> game_track ;
     private final Dice dice ;
     private int total_points ;
-    private Player player ;
+    private final Player player ;
     private Floor curr_floor;
     private int lastfloor ;
     //private int current_level;
@@ -35,21 +35,30 @@ public class Game {
         game_track.add( new Emptyfloor(6));
         game_track.add( new Emptyfloor(7));
         game_track.add( new Ladderfloor(8));
-        game_track.add( new Emptyfloor(0));
-        game_track.add( new Emptyfloor(1));
+        game_track.add( new Emptyfloor(9));
+        game_track.add( new Emptyfloor(10));
         game_track.add( new Cobrafloor(11));
-        game_track.add( new Emptyfloor(0));
-        game_track.add( new Emptyfloor(1));
+        game_track.add( new Emptyfloor(12));
+        game_track.add( new Emptyfloor(13));
 
         System.out.println("The Game Setup is ready !!!");
         print_break();
 
     }
 
-    void addfloor(){
+    void addfloor(int ver){
 
-        System.out.println("Enter new floor to be be added");
+        if(ver==1){ game_track.add(new Snakefloor(++lastfloor)); return ;}
 
+        if(ver==2){ game_track.add(new Cobrafloor(++lastfloor)); return ;}
+
+        if(ver==3){ game_track.add(new Emptyfloor(++lastfloor)); }
+
+    }
+
+    void change_dice(int x){
+
+        dice.setNum_face(x);
     }
 
     int RollDice(){
@@ -68,7 +77,7 @@ public class Game {
 
             if(this.RollDice()==1){
 
-                player.setCurr_position(player.getCurr_position()+1);
+                player.setCurr_position(player.getCurr_position()+1,lastfloor);
                 this.curr_floor = get_curr_floor(player.getCurr_position());
                 this.total_points += curr_floor.getScore_awarded();
                 this.print_current_status();
@@ -81,7 +90,7 @@ public class Game {
         }
     }
 
-    void start() throws Exception{
+    void start(){
 
         while(true) {
 
@@ -91,9 +100,9 @@ public class Game {
 
             int throw_value = RollDice();
 
-            if (player.getCurr_position() + throw_value <= 13) {
+            if (player.getCurr_position() + throw_value <= lastfloor) {
 
-                player.setCurr_position(player.getCurr_position() + throw_value);
+                player.setCurr_position(player.getCurr_position() + throw_value , lastfloor);
                 this.curr_floor = get_curr_floor(player.getCurr_position());
                 this.total_points += curr_floor.getScore_awarded();
                 this.print_current_status();
@@ -105,7 +114,7 @@ public class Game {
                     continue;
                 }
 
-                player.setCurr_position(curr_floor.getNext_floor_position());
+                player.setCurr_position(curr_floor.getNext_floor_position(),lastfloor);
                 this.curr_floor = get_curr_floor(player.getCurr_position());
                 this.total_points += curr_floor.getScore_awarded();
                 this.print_current_status();
@@ -137,7 +146,7 @@ public class Game {
 
     Floor get_curr_floor(int lvl){
 
-        if(lvl<0 || lvl>13){
+        if(lvl<0 || lvl>lastfloor){
             System.out.println("Invalid Floor level");
             return null;
         }

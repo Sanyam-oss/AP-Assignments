@@ -2,26 +2,26 @@ package com.company;
 
 public class Player {
 
-    private String Name ;
-    private int points ;
+    private final String Name ;
     private int curr_position;
-    // private Floor curr_floor ;
+//     private int points ;
+//     private Floor curr_floor ;
 
     Player(String Name) {
 
         this.Name = Name;
-        this.points = 0;
         this.curr_position = -1;
-        //this.curr_floor = null ;
+        // this.points = 0;
+        // this.curr_floor = null ;
     }
 
     int getCurr_position(){
         return curr_position;
     }
 
-    void setCurr_position(int pos){
+    void setCurr_position(int pos , int last_pos){
 
-        if(pos>13 || pos<0){ return ; }
+        if(pos>last_pos || pos<0){ return ; }
         this.curr_position=pos;
     }
 
