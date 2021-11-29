@@ -11,21 +11,20 @@ public class Bucket {
     }
 
     void addToy(Toy toy){
+
         if(toy!=null){                           // Exception
             bucket.add(toy);
         }
     }
 
-    void print_toys(){
+    void print_toys() throws NoToyException{
 
         if (bucket.size()==0){
-            System.out.println("No Toys , Empty bucket");
-            return;
+            throw new NoToyException("No Toys , Empty Bucket");
         }
 
         for (Toy toy : bucket) {
-            System.out.print(toy.getName() + " ");
+            System.out.println(toy.getName() + " ");
         }
-        System.out.println();
     }
 }

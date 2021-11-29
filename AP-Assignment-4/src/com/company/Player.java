@@ -8,19 +8,21 @@ public class Player {
        this.bucket = new Bucket();
     }
 
-    Bucket getBucket(){
-        return this.bucket;
-    }
-
     void add_Toy(Toy toy){
         this.bucket.addToy(toy);
     }
 
     void display_bucket(){
-        bucket.print_toys();
+
+        try{
+            bucket.print_toys();
+        }
+        catch (NoToyException e){
+            System.out.println(e.getMessage());
+        }
     }
 
-
-
-
+    Bucket getBucket(){
+        return this.bucket;
+    }
 }

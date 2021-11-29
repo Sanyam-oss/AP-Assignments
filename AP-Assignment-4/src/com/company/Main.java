@@ -1,6 +1,6 @@
 package com.company;
 
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
 
@@ -13,7 +13,9 @@ public class Main {
         scanner.nextLine();
 
         Gameplay Game = new Gameplay();
-
         Game.play();
     }
 }
+
+// Exceptions Used > Checked : IO Exception , NoToyException , InvalidInputException
+//                 > Unchecked : IndexOutOfBoundsException , CLoneNotSupported , Arithmetic , Nullpointer
