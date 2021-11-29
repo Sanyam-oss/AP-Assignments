@@ -9,6 +9,7 @@ public class Gameplay {
     private final ArrayList<Tile> Carpet ;
     private final int carpet_length;
     private final Player player;
+    private Calculator calculator ;
     private Tile curr_tile;
     private int curr_pos;
     private final int last_tile;
@@ -22,6 +23,7 @@ public class Gameplay {
         this.Carpet = new ArrayList<>(21);
         this.carpet_length = 20 ;
         this.player = new Player();
+        this.calculator = new Calculator();
         this.curr_pos = 0 ;
         this.curr_tile = null ;
         this.set_carpet();
@@ -32,7 +34,7 @@ public class Gameplay {
 
     void set_carpet(){
 
-        Carpet.add(null);                    // To apply 1-based indexing and exception creation
+        Carpet.add(new Tile());                    // To apply 1-based indexing and exception creation
         Carpet.add(new Tile("A"));
         Carpet.add(new Tile("B"));
         Carpet.add(new Tile("C"));
@@ -61,26 +63,52 @@ public class Gameplay {
 
         while(chance_num < max_chances){
 
+            print_line();
             System.out.print("Hit Enter for your "+helper(chance_num)+" hop!");
             scanner.nextLine();
 
             curr_pos = this.random_num_generator();
 
-            // Array out of bound Exception
+            boolean flag = false ;
 
-            if(curr_pos > last_tile){
+            try{
+
+                curr_tile = Carpet.get(curr_pos);                 // Array out of bound Exception
+
+            }catch (IndexOutOfBoundsException e){
+
                 System.out.println("Redbull gives you wings :)");
                 System.out.println("You are too energetic and zoomed past all the tiles. Muddy Puddle Splash! ");
                 chance_num++;
-                continue;
+                flag = true ;
             }
 
-            System.out.println("You landed on Tile "+curr_pos);
+            if(flag){ continue; }
+
+            System.out.println( "You landed on Tile " + curr_pos );
 
             if((curr_pos & 1) == 0){
 
-                curr_tile = Carpet.get(curr_pos);
-                Toy won_toy = curr_tile.getToy();        // Check for null pointer
+                Toy won_toy = null ;
+                boolean exc = false ;
+
+                try{
+                    won_toy = curr_tile.getToy();                      // Check for null pointer (Clone issue)
+                }
+
+                catch(NoToyException e){
+
+                    try{
+                        won_toy = curr_tile.getToy();                  // REDO STEP
+
+                    }catch (NoToyException ex){
+
+                        System.out.println(ex.getMessage());
+                        exc = true ;
+                    }
+                }
+
+                if(exc){ chance_num++ ; continue ; }
 
                 player.add_Toy(won_toy);
                 System.out.println("You won a Toy " + won_toy.getName());
@@ -88,19 +116,83 @@ public class Gameplay {
 
             else{
 
-                System.out.println("Question answer round. Integer or strings? ");
-                String inp = Reader.next();
+                flag=true;
+                String input = null ;
 
-                if((inp.toLowerCase()).equals("integer")){
+                while(flag) {
 
+                    System.out.println("Question answer round. Integer or String? ");
+                    String inp = Reader.next();
+                    flag = false ;
+
+                    try {
+
+                        input = question_type(inp);
+
+                    } catch (InvalidInputException e) {
+
+                        System.out.println(e.getMessage());
+                        flag = true;
+                    }
                 }
 
-                else if((inp.toLowerCase()).equals("string")){
+                boolean verdict = false ;
 
+                if(input.equals("integer")){
+
+                    int op1 = Number_generator();
+                    int op2 = Number_generator();
+
+                    System.out.println("Calculate the result of "+op1+" divided by "+op2+ " [ (U) if undefined ] ");
+
+                    String user_ans = Reader.next();
+
+                    verdict = calculator.verify(op1,op2,user_ans);
+                }
+
+                if(input.equals("string")){
+
+                    int len = 1+rand.nextInt(6);
+                    String op1 = String_generator(len);
+                    String op2 = String_generator(len);
+
+                    System.out.println("Calculate the concatenation of strings " +op1+" and "+op2);
+
+                    String user_ans = Reader.next();
+
+                    verdict = calculator.verify(op1,op2,user_ans);
+                }
+
+                if(!verdict) {
+                    System.out.println("Incorrect Answer");
+                    System.out.println("You didn't won any Toy");
                 }
 
                 else{
-                    System.out.println("Invalid input , you lost a chance to win Toy this time");
+
+                    Toy won_toy = null ;
+                    boolean exc = false ;
+
+                    try{
+                        won_toy = curr_tile.getToy();                     // Check for null pointer
+                    }
+
+                    catch(NoToyException e){
+
+                        try{
+                            won_toy = curr_tile.getToy();                  // REDO STEP
+
+                        }catch (NoToyException ex){
+
+                            System.out.println(ex.getMessage());
+                            exc = true ;
+                        }
+                    }
+
+                    if(exc){ chance_num++ ; continue ; }
+
+                    player.add_Toy(won_toy);
+                    System.out.println("You won a Toy " + won_toy.getName());
                 }
             }
 
@@ -112,8 +204,34 @@ public class Gameplay {
         player.display_bucket();
     }
 
+    String question_type(String inp) throws InvalidInputException{
+
+        if(((inp.toLowerCase()).equals("integer")) || ((inp.toLowerCase()).equals("string"))){
+            return inp.toLowerCase();
+        }
+
+        throw new InvalidInputException("Input must be Integer or String");
+    }
+
     int random_num_generator(){
+
         return (1+rand.nextInt(25));
+    }
+
+    int Number_generator(){
+        return (rand.nextInt(10000)-5000);
+    }
+
+    String String_generator(int len){
+
+        String s = "";
+
+        for (int i = 0; i < len; i++) {
+
+            char c = (char)(97+rand.nextInt(26));
+            s+=c;
+        }
+        return s ;
     }
 
     void print_line(){

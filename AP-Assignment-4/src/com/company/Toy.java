@@ -15,9 +15,10 @@ public class Toy implements Cloneable {
             Toy copy = (Toy)super.clone();
             return copy;
 
-        } catch (CloneNotSupportedException e) {
+        } catch (CloneNotSupportedException e) {  // Won't even happen since implements CLoneable Interface
 
-            return null;       // Null pointer check , though won't happen ever since implements Cloneable interface
+            return null;                          // Null pointer check
+
         }
     }
 
